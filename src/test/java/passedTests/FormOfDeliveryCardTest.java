@@ -1,3 +1,5 @@
+package passedTests;
+
 import com.codeborne.selenide.Condition;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -243,39 +245,6 @@ public class FormOfDeliveryCardTest {
         assertEquals("rgba(255, 92, 92, 1)", text);
     }
 
-//    @Test
-//    void shouldTestSuccessOrderIfNameWithSpaceAndHyphen() {
-//        LocalDate localDate = LocalDate.now().plusDays(3);
-//        String date = DateTimeFormatter.ofPattern("dd.MM.yyyy").format(localDate);
-//        $("[data-test-id='city'] .input__control").setValue("Ульяновск");
-//        $("[data-test-id='date'] .input__control").doubleClick();
-//        $("[data-test-id='date'] .input__control")
-//                .sendKeys(Keys.chord(BACK_SPACE,
-//                        date));
-//        $("[data-test-id='name'] .input__control").setValue("Mария Гребенькова-Ушакова");
-//        $("[data-test-id='phone'] .input__control").setValue("+79876543210");
-//        $$(".checkbox__box").find(Condition.visible).click();
-//        $$("button").find(Condition.exactText("Забронировать")).click();
-//        $(withText("Встреча успешно забронирована"))
-//                .shouldBe(Condition.visible, Duration.ofSeconds(15));
-//    }
-//
-//    @Test
-//    void shouldTestSuccessOrderIfNameWithLetterYo() {
-//        LocalDate localDate = LocalDate.now().plusDays(3);
-//        String date = DateTimeFormatter.ofPattern("dd.MM.yyyy").format(localDate);
-//        $("[data-test-id='city'] .input__control").setValue("Ульяновск");
-//        $("[data-test-id='date'] .input__control").doubleClick();
-//        $("[data-test-id='date'] .input__control")
-//                .sendKeys(Keys.chord(BACK_SPACE,
-//                        date));
-//        $("[data-test-id='name'] .input__control").setValue("Mария Гребёнькова");
-//        $("[data-test-id='phone'] .input__control").setValue("+79876543210");
-//        $$(".checkbox__box").find(Condition.visible).click();
-//        $$("button").find(Condition.exactText("Забронировать")).click();
-//        $(withText("Встреча успешно забронирована"))
-//                .shouldBe(Condition.visible, Duration.ofSeconds(15));
-//    }
 }
 
 
