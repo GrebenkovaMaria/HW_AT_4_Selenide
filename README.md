@@ -1,0 +1,1 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/rnmo14gn96u0h4nw?svg=true)](https://ci.appveyor.com/project/GrebenkovaMaria/hw-at-4-selenide)

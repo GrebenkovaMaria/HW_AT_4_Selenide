@@ -12,13 +12,16 @@ public class FormOfDeliveryCardTest {
 
     @Test
     void shouldTestSuccessOrderIfCorrectFilling() {
-       LocalDate localDate = LocalDate.now().plusDays(3);
-       String  date = DateTimeFormatter.ofPattern("yyyy/MM/dd").format(localDate);
+       LocalDate localDate = LocalDate.now().plusDays(5);
+       String  date = DateTimeFormatter.ofPattern("dd.MM.yyyy").format(localDate);
         open("http://localhost:9999");
-        $$("[data-test-id='city']").find(Condition.visible).setValue("Ульяновск");
-        $$("[placeholder='Дата встречи']").find(Condition.visible).setValue(date);
-        $$("[data-test-id='name']").find(Condition.visible).setValue("Мария Гребенькова");
-        $$("[data-test-id='phone']").find(Condition.visible).setValue("+79876543210");
+        $("[data-test-id='city'] .input__control").setValue("Ульяновск");
+        $("[data-test-id='date'] .input__control").click();
+        $("[data-test-id='date'] .input__control").click();
+        $("[data-test-id='date'] .input__control").clear();
+       // $("[data-test-id='date'] .input__control").sendKeys(date);
+        $("[data-test-id='name'] .input__control").setValue("Мария Гребенькова");
+        $("[data-test-id='phone'] .input__control").setValue("+79876543210");
         $$(".checkbox__box").find(Condition.visible).click();
         $$("button").find(Condition.exactText("Забронировать")).click();
         $(withText("Встреча успешно забронирована"))
@@ -28,4 +31,19 @@ public class FormOfDeliveryCardTest {
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
