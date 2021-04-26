@@ -14,11 +14,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.openqa.selenium.Keys.BACK_SPACE;
 
 public class FormOfDeliveryCardTest {
+    public String generateDate (int shift){
+        String date;
+        LocalDate localDate = LocalDate.now().plusDays(shift);
+        date = DateTimeFormatter.ofPattern("dd.MM.yyyy").format(localDate);
+        return date;
+    }
 
     @BeforeEach
     void openUrl() {
         open("http://localhost:9999");
     }
+
 
     @AfterEach
     void tearDown() {
@@ -28,8 +35,7 @@ public class FormOfDeliveryCardTest {
 
     @Test
     void shouldTestSuccessOrderIfCorrectFilling() {
-        LocalDate localDate = LocalDate.now().plusDays(5);
-        String date = DateTimeFormatter.ofPattern("dd.MM.yyyy").format(localDate);
+        String date = generateDate(3);
         $("[data-test-id='city'] .input__control").setValue("Ульяновск");
         $("[data-test-id='date'] .input__control").doubleClick();
         $("[data-test-id='date'] .input__control")
@@ -37,7 +43,7 @@ public class FormOfDeliveryCardTest {
                         date));
         $("[data-test-id='name'] .input__control").setValue("Мария Гребенькова");
         $("[data-test-id='phone'] .input__control").setValue("+79876543210");
-        $$(".checkbox__box").find(Condition.visible).click();
+         $$(".checkbox__box").find(Condition.visible).click();
         $$("button").find(Condition.exactText("Забронировать")).click();
         $(withText("Встреча успешно забронирована"))
                 .shouldBe(Condition.visible, Duration.ofSeconds(15));
@@ -47,8 +53,7 @@ public class FormOfDeliveryCardTest {
 
     @Test
     void shouldTestSuccessOrderIfPlusThreeDays() {
-        LocalDate localDate = LocalDate.now().plusDays(3);
-        String date = DateTimeFormatter.ofPattern("dd.MM.yyyy").format(localDate);
+        String date = generateDate(3);
         $("[data-test-id='city'] .input__control").setValue("Ульяновск");
         $("[data-test-id='date'] .input__control").doubleClick();
         $("[data-test-id='date'] .input__control")
@@ -66,8 +71,7 @@ public class FormOfDeliveryCardTest {
 
     @Test
     void shouldTestSuccessOrderIfPlus365Days() {
-        LocalDate localDate = LocalDate.now().plusDays(365);
-        String date = DateTimeFormatter.ofPattern("dd.MM.yyyy").format(localDate);
+        String date = generateDate(365);
         $("[data-test-id='city'] .input__control").setValue("Ульяновск");
         $("[data-test-id='date'] .input__control").doubleClick();
         $("[data-test-id='date'] .input__control")
@@ -85,8 +89,7 @@ public class FormOfDeliveryCardTest {
 
     @Test
     void shouldTestUnsuccessOrderIfPlusTwoDays() {
-        LocalDate localDate = LocalDate.now().plusDays(2);
-        String date = DateTimeFormatter.ofPattern("dd.MM.yyyy").format(localDate);
+        String date = generateDate(2);
         $("[data-test-id='city'] .input__control").setValue("Ульяновск");
         $("[data-test-id='date'] .input__control").doubleClick();
         $("[data-test-id='date'] .input__control")
@@ -102,8 +105,7 @@ public class FormOfDeliveryCardTest {
 
     @Test
     void shouldTestUnsuccessOrderIfNoName() {
-        LocalDate localDate = LocalDate.now().plusDays(3);
-        String date = DateTimeFormatter.ofPattern("dd.MM.yyyy").format(localDate);
+        String date = generateDate(3);
         $("[data-test-id='city'] .input__control").setValue("Ульяновск");
         $("[data-test-id='date'] .input__control").doubleClick();
         $("[data-test-id='date'] .input__control")
@@ -118,8 +120,7 @@ public class FormOfDeliveryCardTest {
 
     @Test
     void shouldTestUnsuccessOrderIfNoCity() {
-        LocalDate localDate = LocalDate.now().plusDays(3);
-        String date = DateTimeFormatter.ofPattern("dd.MM.yyyy").format(localDate);
+        String date = generateDate(3);
         $("[data-test-id='date'] .input__control").doubleClick();
         $("[data-test-id='date'] .input__control")
                 .sendKeys(Keys.chord(BACK_SPACE,
@@ -134,8 +135,7 @@ public class FormOfDeliveryCardTest {
 
     @Test
     void shouldTestUnsuccessOrderIfNoNumber() {
-        LocalDate localDate = LocalDate.now().plusDays(365);
-        String date = DateTimeFormatter.ofPattern("dd.MM.yyyy").format(localDate);
+        String date = generateDate(3);
         $("[data-test-id='city'] .input__control").setValue("Ульяновск");
         $("[data-test-id='date'] .input__control").doubleClick();
         $("[data-test-id='date'] .input__control")
@@ -163,8 +163,7 @@ public class FormOfDeliveryCardTest {
 
     @Test
     void shouldTestUnsuccessOrderIfCityNotFromList() {
-        LocalDate localDate = LocalDate.now().plusDays(3);
-        String date = DateTimeFormatter.ofPattern("dd.MM.yyyy").format(localDate);
+        String date = generateDate(3);
         $("[data-test-id='city'] .input__control").setValue("Минск");
         $("[data-test-id='date'] .input__control").doubleClick();
         $("[data-test-id='date'] .input__control")
@@ -180,8 +179,7 @@ public class FormOfDeliveryCardTest {
 
     @Test
     void shouldTestUnsuccessOrderIfNameInEnglish() {
-        LocalDate localDate = LocalDate.now().plusDays(3);
-        String date = DateTimeFormatter.ofPattern("dd.MM.yyyy").format(localDate);
+        String date = generateDate(3);
         $("[data-test-id='city'] .input__control").setValue("Ульяновск");
         $("[data-test-id='date'] .input__control").doubleClick();
         $("[data-test-id='date'] .input__control")
@@ -197,8 +195,7 @@ public class FormOfDeliveryCardTest {
 
     @Test
     void shouldTestUnsuccessOrderIfTelWithoutPlusOnStart() {
-        LocalDate localDate = LocalDate.now().plusDays(3);
-        String date = DateTimeFormatter.ofPattern("dd.MM.yyyy").format(localDate);
+        String date = generateDate(3);
         $("[data-test-id='city'] .input__control").setValue("Ульяновск");
         $("[data-test-id='date'] .input__control").doubleClick();
         $("[data-test-id='date'] .input__control")
@@ -214,8 +211,7 @@ public class FormOfDeliveryCardTest {
 
     @Test
     void shouldTestUnsuccessOrderIfTelNotContainsElevenFigures() {
-        LocalDate localDate = LocalDate.now().plusDays(3);
-        String date = DateTimeFormatter.ofPattern("dd.MM.yyyy").format(localDate);
+        String date = generateDate(3);
         $("[data-test-id='city'] .input__control").setValue("Ульяновск");
         $("[data-test-id='date'] .input__control").doubleClick();
         $("[data-test-id='date'] .input__control")
@@ -231,8 +227,7 @@ public class FormOfDeliveryCardTest {
 
     @Test
     void shouldTestUnsuccessOrderIfNoClickOnCofirmation() {
-        LocalDate localDate = LocalDate.now().plusDays(3);
-        String date = DateTimeFormatter.ofPattern("dd.MM.yyyy").format(localDate);
+        String date = generateDate(3);
         $("[data-test-id='city'] .input__control").setValue("Ульяновск");
         $("[data-test-id='date'] .input__control").doubleClick();
         $("[data-test-id='date'] .input__control")
@@ -245,6 +240,21 @@ public class FormOfDeliveryCardTest {
         assertEquals("rgba(255, 92, 92, 1)", text);
     }
 
+    @Test
+    void shouldTestSuccessOrderIfNameWithSpaceAndHyphen() {
+        String date = generateDate(3);
+        $("[data-test-id='city'] .input__control").setValue("Ульяновск");
+        $("[data-test-id='date'] .input__control").doubleClick();
+        $("[data-test-id='date'] .input__control")
+                .sendKeys(Keys.chord(BACK_SPACE,
+                        date));
+        $("[data-test-id='name'] .input__control").setValue("Мария-Анжела Гребенькова-Ушакова");
+        $("[data-test-id='phone'] .input__control").setValue("+79876543210");
+        $$(".checkbox__box").find(Condition.visible).click();
+        $$("button").find(Condition.exactText("Забронировать")).click();
+        $(withText("Встреча успешно забронирована"))
+                .shouldBe(Condition.visible, Duration.ofSeconds(15));
+    }
 }
 
 
